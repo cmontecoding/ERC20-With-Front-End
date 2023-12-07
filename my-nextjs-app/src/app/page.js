@@ -20,6 +20,7 @@ export default function Home() {
       <main style={{}}>
         <h1>Arman/Andrew</h1>
         {/* Add your other content here */}
+        <Image src={logo} alt="Logo" width={500} height={75} />
       </main>
     </div>
   );
