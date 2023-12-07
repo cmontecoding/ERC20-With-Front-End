@@ -14,3 +14,6 @@ docs/
 .env
 
 lib/
+.yarn/
+.yarnrc
+package-lock.json
