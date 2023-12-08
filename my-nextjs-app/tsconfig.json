@@ -18,17 +18,14 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["components/*"],
+    }
   },
   "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts"],
   "exclude": ["node_modules"],
   // Added types for React
-  "types": ["react", "react-dom"],
-  "paths": {
-    "@app/*": ["./app/*"],
-    "@assets/*": ["./assets/*"],
-    "@components/*": ["./components/*"],
-    "@styles/*": ["./styles/*"],
-    "@utils/*": ["./utils/*"]
-  }
+  "types": ["react", "react-dom"]
 }
