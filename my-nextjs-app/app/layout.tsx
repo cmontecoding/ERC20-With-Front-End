@@ -5,7 +5,7 @@ import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 //import Navbar from "../components/Navbar";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Crypto",
   description: "next generation of exchnages ",
 };
