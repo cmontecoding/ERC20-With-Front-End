@@ -1,5 +1,4 @@
 import { NAV_LINKS } from "@/constants";
-import { link } from "fs";
 import Image from "next/image"; //Optimizes images for faster load times
 import Link from "next/link";
 
@@ -8,15 +7,19 @@ const Navbar = () => {
     <nav className="flexBetween max-container padding-container relative z-30 py-5">
       <Link href="/">
         <Image src="/logo.png" alt="logo" width={75} height={75}></Image>
-
-        <ul className="hidden h-full gap-12 lg:flex">
-          {NAV_LINKS.map((link) => (
-            <link href={link.href} key={link.key}>
-              {link.label}
-            </link>
-          ))}
-        </ul>
       </Link>
+
+      <ul className="hidden h-full gap-12 lg:flex">
+        {NAV_LINKS.map((link) => (
+          <Link
+            href={link.href}
+            key={link.key}
+            className="regular-16 text-gray-50 flexCenter cursor-pointer pb-1.5 transition-all hover: font-bold"
+          >
+            {link.label}
+          </Link>
+        ))}
+      </ul>
     </nav>
   );
 };
