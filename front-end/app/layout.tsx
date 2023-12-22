@@ -1,27 +1,79 @@
-import type { Metadata } from "next";
+import { useEffect, useState } from "react";
+import Web3 from "web3";
+import { Contract } from "web3-eth-contract";
 
-import "./globals.css";
+const [contract, setContract] = useState<any>(null);
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-
-export const metadata: Metadata = {
-  title: "cryptoRabbit",
-  description: "The future of crypto",
+declare global {
+  interface Window {
+    ethereum: any;
+  }
+}
+// Define the AbiItem type
+type AbiItem = {
+  constant?: boolean;
+  inputs: { name: string; type: string }[];
+  name: string;
+  outputs?: any[];
+  payable?: boolean;
+  stateMutability?: "nonpayable" | "payable" | "pure" | "view";
+  type: string;
+  anonymous?: boolean;
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+// Replace with your contract's ABI
+const contractAbi: AbiItem[] = [
+  {
+    inputs: [
+      {
+        name: "to",
+        type: "address",
+      },
+      {
+        name: "_amount",
+        type: "uint256",
+      },
+    ],
+    name: "mint",
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
+
+// Replace with your contract's address
+const contractAddress = "0xee392627cB20Cc3fA91A02D1117105e6C4d4bdf6";
+
+export default function MintPage() {
+  const [account, setAccount] = useState("");
+  const [contract, setContract] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.ethereum) {
+      const web3 = new Web3(window.ethereum);
+      web3.eth.getAccounts().then((accounts) => {
+        setAccount(accounts[0]);
+      });
+
+      const contractInstance = new web3.eth.Contract(
+        contractAbi,
+        contractAddress
+      );
+      setContract(contractInstance);
+    }
+  }, []);
+
+  const mintTokens = async () => {
+    if (contract) {
+      // Replace with the amount of tokens you want to mint
+      const amount = web3.utils.toWei("1", "ether");
+
+      await contract.methods.mint(account, amount).send({ from: account });
+    }
+  };
+
   return (
-    <html lang="en">
-      <body>
-        <Navbar></Navbar>
-        <main className="relative overflow-hidden">{children}</main>
-        <Footer></Footer>
-      </body>
-    </html>
+    <div>
+      <button onClick={mintTokens}>Mint Tokens</button>
+    </div>
   );
 }
