@@ -2,7 +2,8 @@
   "dependencies": {
     "@types/web3": "^1.2.2",
     "node": "^21.2.0",
-    "web3": "^4.3.0"
+    "web3": "^4.3.0",
+    "web3-eth-contract": "^4.1.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.42"
