@@ -9,20 +9,9 @@ declare global {
     ethereum: any;
   }
 }
-// Define the AbiItem type
-type AbiItem = {
-  constant?: boolean;
-  inputs: { name: string; type: string }[];
-  name: string;
-  outputs?: any[];
-  payable?: boolean;
-  stateMutability?: "nonpayable" | "payable" | "pure" | "view";
-  type: string;
-  anonymous?: boolean;
-};
 
 // Replace with your contract's ABI
-const contractAbi: AbiItem[] = [
+const contractAbi = [
   {
     inputs: [
       {
@@ -65,7 +54,7 @@ export default function MintPage() {
   const mintTokens = async () => {
     if (contract) {
       // Replace with the amount of tokens you want to mint
-      const amount = web3.utils.toWei("1", "ether");
+      const amount = Web3.utils.toWei("1", "ether");
 
       await contract.methods.mint(account, amount).send({ from: account });
     }
